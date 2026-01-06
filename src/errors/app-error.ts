@@ -11,8 +11,15 @@ export default class AppError extends Error {
 }
 
 export class ValidationError extends AppError {
-  constructor(message: string) {
-    super(message, 400, "VALIDATION_ERROR");
+  readonly details?: Array<{ field: string; message: string }>;
+
+  constructor(message: string | Array<{ field: string; message: string }>) {
+    const errorMessage = Array.isArray(message) ? "Validation failed" : message;
+    super(errorMessage, 400, "VALIDATION_ERROR");
+
+    if (Array.isArray(message)) {
+      this.details = message;
+    }
   }
 }
 export class NotFoundError extends AppError {
