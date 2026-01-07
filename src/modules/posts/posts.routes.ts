@@ -5,4 +5,5 @@ import { inputPostSchema } from "./posts.interfaces";
 
 export const postsRoutes = (router: Router) => {
   router.post("/posts", validateBody(inputPostSchema), postsController.create);
+  router.get("/posts", postsController.getAll);
 };

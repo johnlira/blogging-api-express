@@ -19,4 +19,12 @@ export const postsRepository = {
 
     return result.rows[0];
   },
+  getAll: async () => {
+    const result = await pool.query(
+      `
+      SELECT * FROM posts
+      `
+    );
+    return result.rows;
+  },
 };
