@@ -2,6 +2,7 @@ import { Response, Request } from "express";
 import { createPost } from "./services/create-post";
 import { InputPost } from "./posts.interfaces";
 import { getAllPosts } from "./services/get-all-posts";
+import { getPostById } from "./services/get-post-by-id";
 
 export const postsController = {
   create: async (req: Request, res: Response) => {
@@ -16,6 +17,13 @@ export const postsController = {
     const posts = await getAllPosts();
     res.status(200).send({
       posts,
+    });
+  },
+  getById: async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const post = await getPostById(id);
+    res.status(200).send({
+      post,
     });
   },
 };
