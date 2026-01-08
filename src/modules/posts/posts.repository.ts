@@ -41,4 +41,25 @@ export const postsRepository = {
 
     return result.rows[0];
   },
+  update: async (id: number, body: InputPost) => {
+    const result = await pool.query(
+      `
+      UPDATE posts 
+      SET title = $1, content = $2, category = $3, tags = $4, updated_at = NOW()
+      WHERE id = $5
+      RETURNING id, title, content, category, tags, created_at, updated_at
+      `,
+      [body.title, body.content, body.category, body.tags, id]
+    );
+
+    return result.rows[0];
+  },
+  delete: async (id: number) => {
+    await pool.query(
+      `
+      DELETE FROM posts WHERE id = $1
+      `,
+      [id]
+    );
+  },
 };

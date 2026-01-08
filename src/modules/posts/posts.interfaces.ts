@@ -5,7 +5,7 @@ export const inputPostSchema = z.object({
     .string()
     .min(2, "Title must have at least 2 characters.")
     .max(50, "Title can't be longer than 50 characters."),
-  content: z.string().min(100, "Content must have at least 100 characters."),
+  content: z.string().min(50, "Content must have at least 50 characters."),
   category: z
     .string()
     .min(2, "Category must have at least 2 characters.")
